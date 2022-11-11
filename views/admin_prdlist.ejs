@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 상품등록 페이지</title>
+    <style>
+        .prdwrap .list {
+            border:1px solid #000; margin-bottom:50px;
+            width:300px;
+        }
+        .prdwrap .list img {width:150px;}
+    </style>
+</head>
+<body>
+    <!-- 상품목록 페이지 / 매장등록 페이지 -->
+    <ul class="admin_menu">
+        <li><a href="/admin/prdlist">상품 등록 페이지</a></li>
+        <li><a href="/admin/storelist">매장 등록 페이지</a></li>
+    </ul>
+    <!-- 등록된 상품 목록 전부 보여주는 구간 -->
+    <div class="prdwrap">
+        <% for(let i = 0; i < prdData.length; i++){ %>
+        <div class="list">
+            <h3><%- prdData[i].num %></h3>
+            <p><%- prdData[i].name %></p>
+            <p><%- prdData[i].category %></p>
+            <img src="/upload/<%- prdData[i].thumbnail %>">
+        </div>
+        <% } %>
+    </div>
+    <!-- 상품을 등록하는 form태그 구간 -->
+    <form action="/add/prdlist" method="post" enctype="multipart/form-data">
+        <select name="category">
+            <option value="커피">커피</option>
+            <option value="쿠키">쿠키</option>
+            <option value="케이크">케이크</option>
+            <option value="브레드">브레드</option>
+        </select>
+        <input type="text" name="name">
+        <input type="file" name="thumbnail">
+        <button type="submit">상품등록</button>
+    </form>
+</body>
+</html>
